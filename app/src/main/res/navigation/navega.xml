@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navega"
+    app:startDestination="@id/um">
+
+    <fragment
+        android:id="@+id/um"
+        android:name="com.example.aula_26_01_2024.Um"
+        android:label="fragment_um"
+        tools:layout="@layout/fragment_um" />
+    <fragment
+        android:id="@+id/dois"
+        android:name="com.example.aula_26_01_2024.Dois"
+        android:label="fragment_dois"
+        tools:layout="@layout/fragment_dois" />
+    <fragment
+        android:id="@+id/tres"
+        android:name="com.example.aula_26_01_2024.tres"
+        android:label="fragment_tres"
+        tools:layout="@layout/fragment_tres" />
+</navigation>
