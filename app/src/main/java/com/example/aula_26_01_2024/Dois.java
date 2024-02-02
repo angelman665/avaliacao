@@ -115,6 +115,7 @@ public class Dois extends Fragment {
             dois.progressBar.setVisibility(View.VISIBLE);
             dois.progressBar.setProgress(0);
             dois.txtpares.setText("Inicio");
+            dois.btpares.setEnabled(false);
         }
 
         @Override
@@ -122,6 +123,7 @@ public class Dois extends Fragment {
             super.onPostExecute(s);
             dois.txtpares.setText(s);
             dois.progressBar.setVisibility(View.INVISIBLE);
+            dois.btpares.setEnabled(true);
 
         }
 
@@ -141,7 +143,7 @@ public class Dois extends Fragment {
                     percentagem = (total * 100) / integers[0];
                     publishProgress(i, percentagem);
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(150);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
