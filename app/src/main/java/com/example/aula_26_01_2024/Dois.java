@@ -1,5 +1,6 @@
 package com.example.aula_26_01_2024;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +66,8 @@ public class Dois extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dois, container, false);
     }
@@ -81,5 +86,68 @@ public class Dois extends Fragment {
                 t.commit();
             }
         });
+        txtpares = view.findViewById(R.id.txt_pares_dois);
+        progressBar = view.findViewById(R.id.progressbar_pares_dois);
+        btpares = view.findViewById(R.id.bt_btpares_dois);
+        btpares.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyAsyncTask myAsyncTask = new MyAsyncTask(Dois.this);
+                myAsyncTask.execute(100);
+            }
+        });
+    }
+
+    TextView txtpares;
+    ProgressBar progressBar;
+    Button btpares;
+
+    class MyAsyncTask extends AsyncTask<Integer, Integer, String> {
+        Dois dois;
+
+        public MyAsyncTask(Dois d) {
+            this.dois = d;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dois.progressBar.setVisibility(View.VISIBLE);
+            dois.progressBar.setProgress(0);
+            dois.txtpares.setText("Inicio");
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            dois.txtpares.setText(s);
+            dois.progressBar.setVisibility(View.INVISIBLE);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            dois.progressBar.setProgress(values[1]);
+            dois.txtpares.setText(String.valueOf(values[0]));
+        }
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+            int i, total, percentagem;
+            for (i = 0, total = 0; total < integers[0]; i++) {
+                if (Biblioteca.EPar(i)) {
+                    total++;
+                    percentagem = (total * 100) / integers[0];
+                    publishProgress(i, percentagem);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            return "Fim";
+        }
     }
 }
