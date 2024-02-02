@@ -16,7 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:text="Two"
+            android:text="<AsyncTask>"
+            android:textAlignment="center"
+            android:textSize="33dp"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/white"
+            android:hint="Pares"
             android:textAlignment="center"
             android:textSize="33dp"></TextView>
 
